@@ -218,7 +218,7 @@ elif page == "🏠 Kalkulator Prediksi Harga":
         
         # Trigger prediction logic
         # 1. Build input vector matching one-hot encoded columns
-        input_data = pd.DataFrame(0, index=[0], columns=encoded_cols)
+        input_data = pd.DataFrame(0.0, index=[0], columns=encoded_cols)
         
         # Fill numeric values
         input_data.loc[0, 'Luas_Tanah_m2'] = luas_tanah
