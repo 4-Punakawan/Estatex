@@ -3,8 +3,8 @@ import numpy as np
 import os
 
 def clean_data():
-    raw_path = '/Users/macbookair/03_KULIAH/01. BIG DATA/FP/datasets/dataset_rumah99_raw.csv'
-    clean_path = '/Users/macbookair/03_KULIAH/01. BIG DATA/FP/datasets/dataset_rumah99_clean.csv'
+    raw_path = 'datasets/dataset_rumah99_raw.csv'
+    clean_path = 'datasets/dataset_rumah99_clean.csv'
     
     # Load dataset
     df = pd.read_csv(raw_path)

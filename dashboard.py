@@ -60,10 +60,10 @@ st.markdown("""
 # Cache data loading and model fitting
 @st.cache_resource
 def load_data_and_model():
-    clean_path = '/Users/macbookair/03_KULIAH/01. BIG DATA/FP/datasets/dataset_rumah99_clean.csv'
+    clean_path = 'datasets/dataset_rumah99_clean.csv'
     if not os.path.exists(clean_path):
         # Fallback if cleaner hasn't run in context
-        raw_path = '/Users/macbookair/03_KULIAH/01. BIG DATA/FP/datasets/dataset_rumah99_raw.csv'
+        raw_path = 'datasets/dataset_rumah99_raw.csv'
         df = pd.read_csv(raw_path).dropna(subset=['Harga_Rupiah', 'Kamar_Tidur', 'Kamar_Mandi', 'Luas_Tanah_m2', 'Luas_Bangunan_m2', 'Jumlah_Lantai', 'Kota'])
         df = df[(df['Kamar_Tidur'] > 0) & (df['Kamar_Mandi'] > 0) & (df['Daya_Listrik_Watt'] > 0)]
         df = df[
