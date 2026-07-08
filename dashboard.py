@@ -125,7 +125,7 @@ st.sidebar.markdown("""
 """.format(r2_score * 100))
 
 # ----------------- PAGE 1: OVERVIEW & EDA -----------------
-if page == "📈 Ringkasan & EDA":
+if page == "Ringkasan & EDA":
     st.markdown("<h1 class='main-header'>Ringkasan Data & Analisis Eksploratif</h1>", unsafe_allow_html=True)
     st.markdown("<p class='subheader'>Visualisasi karakteristik fisik dan geografis listing rumah tinggal</p>", unsafe_allow_html=True)
     
@@ -184,7 +184,7 @@ if page == "📈 Ringkasan & EDA":
             st.pyplot(fig)
 
 # ----------------- PAGE 2: PREDICTION CALCULATOR -----------------
-elif page == "🏠 Kalkulator Prediksi Harga":
+elif page == "Kalkulator Prediksi Harga":
     st.markdown("<h1 class='main-header'>Kalkulator Prediksi Harga Rumah</h1>", unsafe_allow_html=True)
     st.markdown("<p class='subheader'>Masukkan spesifikasi rumah untuk mengestimasi harga pasar menggunakan Regresi Linier Berganda</p>", unsafe_allow_html=True)
     
@@ -192,7 +192,7 @@ elif page == "🏠 Kalkulator Prediksi Harga":
     col_input, col_result = st.columns([1.5, 1])
     
     with col_input:
-        st.write("### 🛠️ Spesifikasi Rumah")
+        st.write("### Spesifikasi Rumah")
         
         # 1. Geolocation Fields
         col_g1, col_g2 = st.columns(2)
@@ -214,7 +214,7 @@ elif page == "🏠 Kalkulator Prediksi Harga":
         daya_listrik = st.selectbox("Kapasitas Listrik (Watt):", [450, 900, 1300, 2200, 3500, 4400, 5500, 6600, 7700, 11000, 13200, 16500, 22000, 33000, 41500, 53000], index=3)
         
     with col_result:
-        st.write("### 🔮 Estimasi Harga Pasar")
+        st.write("### Estimasi Harga Pasar")
         
         # Trigger prediction logic
         # 1. Build input vector matching one-hot encoded columns
