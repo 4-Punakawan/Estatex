@@ -18,43 +18,294 @@ st.set_page_config(
 
 # Custom CSS for modern design and premium look
 st.markdown("""
-<style>
-    .reportview-container {
-        background: #0e1117;
-    }
-    .main-header {
-        font-size: 38px;
-        font-weight: 800;
-        background: linear-gradient(135deg, #00B4DB, #0083B0);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 20px;
-    }
-    .subheader {
-        font-size: 20px;
-        color: #8892b0;
-        margin-bottom: 30px;
-    }
-    .metric-card {
-        background-color: #1e222b;
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 5px solid #00B4DB;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        margin-bottom: 20px;
-    }
-    .prediction-title {
-        font-size: 16px;
-        color: #8892b0;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    .prediction-value {
-        font-size: 36px;
-        font-weight: 700;
-        color: #00B4DB;
-    }
-</style>
+    <style>
+        .reportview-container {
+            background: #0a0a0f;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #e1e1e6;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a3a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a3a4a;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .main-header {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00B4DB, #0083B0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            text-shadow: 0 4px 20px rgba(0, 180, 219, 0.3);
+        }
+        
+        .subheader {
+            font-size: 18px;
+            color: #a0a0b0;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #1e222b, #171a23);
+            padding: 28px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 180, 219, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00B4DB, #0083B0);
+            transition: width 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 180, 219, 0.15);
+            border-color: rgba(0, 180, 219, 0.3);
+        }
+        
+        .metric-card:hover::before {
+            width: 8px;
+        }
+        
+        .prediction-title {
+            font-size: 14px;
+            color: #8892b0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .prediction-value {
+            font-size: 42px;
+            font-weight: 800;
+            color: #00B4DB;
+            margin: 12px 0;
+            background: linear-gradient(135deg, #00B4DB, #0083B0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Sidebar styling */
+        .sidebar .sidebar-content {
+            background: #0a0a0f;
+            padding: 20px 15px;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .sidebar h2 {
+            color: #00B4DB !important;
+            font-size: 18px !important;
+            font-weight: 700 !important;
+            margin-bottom: 20px !important;
+            letter-spacing: 1px;
+        }
+        
+        .sidebar .sidebar-radio > label > div {
+            background: #1e222b;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar .sidebar-radio > label > div:hover {
+            background: rgba(0, 180, 219, 0.1);
+            border-color: rgba(0, 180, 219, 0.3);
+            transform: translateX(5px);
+        }
+        
+        .sidebar .sidebar-radio > label > div[data-baseweb="radio"] > div:first-child {
+            margin-right: 12px;
+        }
+        
+        /* Tabs styling */
+        .stTabs [data-baseweb="tab"] {
+            background-color: transparent;
+            border-radius: 8px 8px 0 0;
+            padding: 10px 20px;
+            margin-right: 5px;
+            font-weight: 600;
+            color: #a0a0b0 !important;
+            transition: all 0.3s ease;
+        }
+        
+        .stTabs [data-baseweb="tab"]:hover {
+            background-color: rgba(0, 180, 219, 0.1);
+            color: #00B4DB !important;
+        }
+        
+        .stTabs [aria-selected="true"] [data-baseweb="tab"] {
+            background-color: rgba(0, 180, 219, 0.15) !important;
+            color: #00B4DB !important;
+            border-bottom: 3px solid #00B4DB !important;
+        }
+        
+        /* Input fields */
+        .stSelectbox > div > div {
+            background-color: #1e222b;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .stSelectbox > div > div:hover {
+            border-color: rgba(0, 180, 219, 0.3);
+        }
+        
+        .stNumberInput > div > div > input, .stSlider > div > div > div > input {
+            background-color: #1e222b;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .stSlider > div > div > div > div {
+            background-color: #00B4DB !important;
+        }
+        
+        /* Tables */
+        .stDataFrame {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .stDataFrame table {
+            background-color: #1e222b;
+        }
+        
+        .stDataFrame th {
+            background-color: #171a23;
+            color: #00B4DB;
+            font-weight: 600;
+            padding: 15px;
+        }
+        
+        .stDataFrame td {
+            padding: 12px 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Cards in stats section */
+        .stMetric {
+            background-color: #1e222b;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stMetric:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 180, 219, 0.1);
+            border-color: rgba(0, 180, 219, 0.2);
+        }
+        
+        .stMetric label {
+            color: #8892b0;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stMetric [data-testid="metric-container"] {
+            color: #00B4DB !important;
+            font-size: 28px !important;
+            font-weight: 700 !important;
+        }
+        
+        /* Container spacing */
+        .element-container {
+            margin-bottom: 25px;
+        }
+        
+        /* Chart containers */
+        .js-plotly-plot, .stPlotlyChart {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #1e222b;
+            padding: 15px;
+        }
+        
+        /* Dark theme text colors */
+        p, div, span, li, td, th {
+            color: #e1e1e6;
+        }
+        
+        a {
+            color: #00B4DB;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: #0083B0;
+            text-decoration: underline;
+        }
+        
+        /* File upload and other inputs */
+        .stFileUploader > div {
+            background-color: #1e222b;
+            border-radius: 12px;
+            border: 2px dashed rgba(0, 180, 219, 0.3);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .stFileUploader > div:hover {
+            border-color: rgba(0, 180, 219, 0.5);
+            background-color: rgba(0, 180, 219, 0.05);
+        }
+        
+        /* Descriptions and help text */
+        .element-container .stAlert {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 """, unsafe_allow_html=True)
 
 # Cache data loading and model fitting
@@ -132,13 +383,33 @@ if page == "Ringkasan & EDA":
     # Key Metrics Rows
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric(label="Total Data Bersih", value=f"{df.shape[0]} Baris")
+        st.markdown(f"""
+        <div class="metric-card">
+            <div class="prediction-title">Total Data Bersih</div>
+            <div style="font-size: 32px; font-weight: 700; color: #e1e1e6;">{df.shape[0]} Baris</div>
+        </div>
+        """, unsafe_allow_html=True)
     with col2:
-        st.metric(label="Rata-rata Harga", value=f"Rp {df['Harga_Rupiah'].mean()/1e9:.2f} Miliar")
+        st.markdown(f"""
+        <div class="metric-card">
+            <div class="prediction-title">Rata-rata Harga</div>
+            <div style="font-size: 32px; font-weight: 700; color: #e1e1e6;">Rp {df['Harga_Rupiah'].mean()/1e9:.2f} Miliar</div>
+        </div>
+        """, unsafe_allow_html=True)
     with col3:
-        st.metric(label="Rata-rata Luas Tanah", value=f"{df['Luas_Tanah_m2'].mean():.1f} m²")
+        st.markdown(f"""
+        <div class="metric-card">
+            <div class="prediction-title">Rata-rata Luas Tanah</div>
+            <div style="font-size: 32px; font-weight: 700; color: #e1e1e6;">{df['Luas_Tanah_m2'].mean():.1f} m²</div>
+        </div>
+        """, unsafe_allow_html=True)
     with col4:
-        st.metric(label="Rata-rata Luas Bangunan", value=f"{df['Luas_Bangunan_m2'].mean():.1f} m²")
+        st.markdown(f"""
+        <div class="metric-card">
+            <div class="prediction-title">Rata-rata Luas Bangunan</div>
+            <div style="font-size: 32px; font-weight: 700; color: #e1e1e6;">{df['Luas_Bangunan_m2'].mean():.1f} m²</div>
+        </div>
+        """, unsafe_allow_html=True)
         
     st.write("### Sampel Data Properti")
     st.dataframe(df[['Judul', 'Harga_Rupiah', 'Provinsi', 'Kota', 'Luas_Tanah_m2', 'Luas_Bangunan_m2', 'Kamar_Tidur', 'Kamar_Mandi', 'Daya_Listrik_Watt']].head(10), use_container_width=True)
