@@ -355,10 +355,46 @@ st.markdown("""
     /* ===== Hide default Streamlit elements but keep sidebar toggle button ===== */
     #MainMenu { visibility: hidden; }
     footer { visibility: hidden; }
-    header { visibility: hidden; }
-    header [data-testid="stSidebarCollapseButton"],
-    header [data-testid="collapsedControl"] {
-        visibility: visible !important;
+    .stAppDeployButton { visibility: hidden; }
+    header {
+        background: transparent !important;
+    }
+
+    /* ===== Style Sidebar Toggle Button (Blue Theme) ===== */
+    [data-testid="stSidebarCollapseButton"] button,
+    [data-testid="collapsedControl"] button,
+    button[data-testid="stBaseButton-headerNoPadding"],
+    button[data-testid="stSidebarCollapseButton"],
+    [data-testid="stSidebar"] button[kind="headerNoPadding"] {
+        color: var(--accent-primary) !important;
+        border: 1px solid rgba(79, 143, 255, 0.25) !important;
+        background-color: rgba(79, 143, 255, 0.1) !important;
+        border-radius: var(--radius-sm) !important;
+        transition: all 0.3s ease !important;
+    }
+    [data-testid="stSidebarCollapseButton"] button:hover,
+    [data-testid="collapsedControl"] button:hover,
+    button[data-testid="stBaseButton-headerNoPadding"]:hover,
+    button[data-testid="stSidebarCollapseButton"]:hover,
+    [data-testid="stSidebar"] button[kind="headerNoPadding"]:hover {
+        color: var(--accent-secondary) !important;
+        border-color: var(--accent-secondary) !important;
+        background-color: rgba(79, 143, 255, 0.2) !important;
+        box-shadow: 0 0 10px rgba(79, 143, 255, 0.25) !important;
+    }
+    [data-testid="stSidebarCollapseButton"] button svg,
+    [data-testid="collapsedControl"] button svg,
+    button[data-testid="stBaseButton-headerNoPadding"] svg,
+    [data-testid="stSidebar"] button[kind="headerNoPadding"] svg {
+        fill: var(--accent-primary) !important;
+        color: var(--accent-primary) !important;
+    }
+    [data-testid="stSidebarCollapseButton"] button:hover svg,
+    [data-testid="collapsedControl"] button:hover svg,
+    button[data-testid="stBaseButton-headerNoPadding"]:hover svg,
+    [data-testid="stSidebar"] button[kind="headerNoPadding"]:hover svg {
+        fill: var(--accent-secondary) !important;
+        color: var(--accent-secondary) !important;
     }
 
     /* ===== Responsive ===== */
