@@ -234,7 +234,7 @@ st.markdown("""
     }
 
     .sidebar-brand {
-        font-size: 1.3rem;
+        font-size: 3rem;
         font-weight: 800;
         letter-spacing: -0.03em;
         background: var(--accent-gradient);
@@ -352,10 +352,14 @@ st.markdown("""
         color: var(--text-primary) !important;
     }
 
-    /* ===== Hide default Streamlit elements ===== */
+    /* ===== Hide default Streamlit elements but keep sidebar toggle button ===== */
     #MainMenu { visibility: hidden; }
     footer { visibility: hidden; }
     header { visibility: hidden; }
+    header [data-testid="stSidebarCollapseButton"],
+    header [data-testid="collapsedControl"] {
+        visibility: visible !important;
+    }
 
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
